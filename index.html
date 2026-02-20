@@ -1026,13 +1026,141 @@
 
 <script>
 // ── Telegram WebApp init ──────────────────────────────────────
+const API_BASE = "https://obj-reliance-continuous-having.trycloudflare.com";
+
 const tg = window.Telegram?.WebApp;
+
 if (tg) {
   tg.ready();
   tg.expand();
   tg.setHeaderColor('#050508');
   tg.setBackgroundColor('#050508');
 }
+
+async function apiPost(path) {
+  const initData = tg?.initData;
+  if (!initData) throw new Error("Нет initData");
+
+  const r = await fetch(`${API_BASE}${path}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ initData })
+  });
+
+  if (!r.ok) {
+    const txt = await r.text();
+    throw new Error(txt);
+  }
+
+  return r.json();
+}
+
+async function loadRealData() {
+  try {
+    const me = await apiPost("/api/me");
+    const leads = await apiPost("/api/leads");
+
+    // ─── Статистика ───
+    animateNumber('stat-today', me.leads_today || 0);
+    animateNumber('stat-total', me.leads_total || 0);
+
+    const created = new Date(me.created_at);
+    const daysActive = Math.floor((Date.now() - created) / 86400000);
+    animateNumber('stat-days', daysActive);
+
+    // ─── План ───
+    document.getElementById('plan-name').textContent =
+      (me.plan === "pro" ? "Про 🚀" : "Старт ⚡");
+
+    document.getElementById('plan-badge').textContent =
+      (me.plan === "pro" ? "PRO" : "СТАРТ");
+
+    document.getElementById('plan-until').textContent =
+      me.sub_until ? "до " + me.sub_until.slice(0, 10) : "—";
+
+    // ─── Профиль ───
+    document.getElementById('prof-profession').textContent =
+      me.profile?.profession || "—";
+
+    document.getElementById('prof-target').textContent =
+      me.profile?.target || "—";
+
+    document.getElementById('prof-check').textContent =
+      me.profile?.avg_check || "—";
+
+    // ─── Лимит ───
+    const dailyLimit = me.plan === "pro" ? 999 : 5;
+    const pct = Math.min((me.leads_today / dailyLimit) * 100, 100);
+
+    document.getElementById('limit-text').textContent =
+      `${me.leads_today} / ${dailyLimit}`;
+
+    document.getElementById('limit-fill').style.width = pct + "%";
+
+    // ─── Лиды ───
+    renderLeadsFromAPI(leads.items || []);
+
+  } catch (e) {
+    document.getElementById('leads-list').innerHTML =
+      `<div class="empty-state">
+        <div class="empty-title">Ошибка загрузки</div>
+        <div class="empty-sub">${e.message}</div>
+      </div>`;
+  }
+}
+
+function renderLeadsFromAPI(items) {
+  const list = document.getElementById('leads-list');
+
+  if (!items.length) {
+    list.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-spider">🕷</div>
+        <div class="empty-title">Паучок ищет...</div>
+        <div class="empty-sub">Лидов пока нет</div>
+      </div>`;
+    return;
+  }
+
+  list.innerHTML = items.map((lead, i) => `
+    <div class="lead-card" style="animation-delay:${i * 0.08}s">
+      <div class="lead-card-header">
+        <div class="lead-badge ${lead.score >= 0.8 ? 'hot' : 'warm'}">
+          ${lead.score >= 0.8 ? '🔥 Горячий' : '⚡ Тёплый'}
+        </div>
+        <div class="lead-time">
+          ${(lead.sent_at || "").slice(11,16)}
+        </div>
+      </div>
+      <div class="lead-user">@${lead.lead_username || "безника"}</div>
+      <div class="lead-chat">${lead.chat_title || ""}</div>
+      <div class="lead-text">${lead.message_text || ""}</div>
+      <div class="lead-score-bar">
+        <div class="lead-score-fill"
+             style="width:${(lead.score || 0) * 100}%"></div>
+      </div>
+      <div class="lead-actions">
+        <button class="btn-write"
+          onclick="tg.openTelegramLink('tg://user?id=${lead.lead_user_id}')">
+          ✍️ Написать
+        </button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function animateNumber(id, target) {
+  const el = document.getElementById(id);
+  let start = 0;
+  const step = Math.ceil(target / 30) || 1;
+  const interval = setInterval(() => {
+    start = Math.min(start + step, target);
+    el.textContent = start;
+    if (start >= target) clearInterval(interval);
+  }, 40);
+}
+
+loadRealData();
 
 // ── Mock данные (заменить на реальный API) ────────────────────
 const DATA = {
