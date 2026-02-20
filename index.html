@@ -33,7 +33,6 @@
     overflow: hidden;
   }
 
-  /* ── Сетка паутины ── */
   .web-bg {
     position: fixed;
     inset: 0;
@@ -47,7 +46,6 @@
     opacity: 0.07;
   }
 
-  /* ── Шум-текстура ── */
   .noise {
     position: fixed;
     inset: 0;
@@ -57,7 +55,6 @@
     opacity: 0.03;
   }
 
-  /* ── App shell ── */
   .app {
     position: relative;
     z-index: 2;
@@ -67,7 +64,6 @@
     overflow: hidden;
   }
 
-  /* ── Header ── */
   .header {
     padding: 20px 20px 0;
     flex-shrink: 0;
@@ -119,6 +115,7 @@
     font-size: 10px;
     color: var(--accent);
     letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
   .status-dot {
     width: 6px;
@@ -133,7 +130,6 @@
     50% { opacity: 0.5; box-shadow: 0 0 12px var(--accent); }
   }
 
-  /* ── Stats row ── */
   .stats-row {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -178,7 +174,6 @@
     text-transform: uppercase;
   }
 
-  /* ── Навигация ── */
   .nav {
     display: flex;
     gap: 4px;
@@ -205,7 +200,6 @@
     font-weight: 700;
   }
 
-  /* ── Контент ── */
   .content {
     flex: 1;
     overflow-y: auto;
@@ -214,12 +208,10 @@
   }
   .content::-webkit-scrollbar { display: none; }
 
-  /* ── Секции ── */
   .section { display: none; }
   .section.active { display: block; animation: fadeIn 0.3s ease; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-  /* ── Лид-карточки ── */
   .leads-list { display: flex; flex-direction: column; gap: 12px; }
 
   .lead-card {
@@ -307,6 +299,7 @@
     padding-left: 10px;
     margin-bottom: 12px;
     font-style: italic;
+    white-space: pre-wrap;
   }
   .lead-score-bar {
     height: 3px;
@@ -341,22 +334,6 @@
   }
   .btn-write:active { transform: scale(0.97); background: #6de860; }
 
-  .btn-skip {
-    width: 40px;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    color: var(--muted);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    transition: all 0.2s;
-  }
-  .btn-skip:active { background: rgba(255,71,87,0.1); color: var(--hot); }
-
-  /* ── Пустой стейт ── */
   .empty-state {
     display: flex;
     flex-direction: column;
@@ -384,9 +361,9 @@
     font-size: 13px;
     color: var(--muted);
     line-height: 1.6;
+    word-break: break-word;
   }
 
-  /* ── Секция профиля ── */
   .profile-section { display: flex; flex-direction: column; gap: 12px; }
 
   .profile-card {
@@ -438,9 +415,9 @@
     color: var(--text);
     font-weight: 500;
     line-height: 1.4;
+    white-space: pre-wrap;
   }
 
-  /* Тариф */
   .plan-card {
     background: linear-gradient(135deg, rgba(127,255,110,0.06), rgba(0,212,255,0.04));
     border: 1px solid rgba(127,255,110,0.2);
@@ -472,7 +449,6 @@
     letter-spacing: 0.05em;
   }
 
-  /* Прогресс лимита */
   .limit-bar-wrap {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -506,7 +482,6 @@
     transition: width 1s cubic-bezier(0.16,1,0.3,1);
   }
 
-  /* Кнопки управления */
   .control-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -538,7 +513,6 @@
     font-family: var(--mono);
   }
 
-  /* ── Аналитика ── */
   .analytics-section { display: flex; flex-direction: column; gap: 12px; }
 
   .chart-card {
@@ -623,7 +597,6 @@
     transition: width 1s cubic-bezier(0.16,1,0.3,1);
   }
 
-  /* ── Bottom nav ── */
   .bottom-nav {
     position: fixed;
     bottom: 0; left: 0; right: 0;
@@ -647,10 +620,9 @@
     padding: 6px 4px;
     border-radius: 12px;
     transition: all 0.2s;
+    position: relative;
   }
-  .bnav-btn.active {
-    background: rgba(127,255,110,0.08);
-  }
+  .bnav-btn.active { background: rgba(127,255,110,0.08); }
   .bnav-icon { font-size: 20px; line-height: 1; }
   .bnav-label {
     font-family: var(--mono);
@@ -661,7 +633,6 @@
   }
   .bnav-btn.active .bnav-label { color: var(--accent); }
 
-  /* ── Toast ── */
   .toast {
     position: fixed;
     top: 20px;
@@ -678,10 +649,12 @@
     transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
     white-space: nowrap;
     box-shadow: 0 4px 30px rgba(127,255,110,0.15);
+    max-width: calc(100vw - 40px);
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .toast.show { transform: translateX(-50%) translateY(0); }
 
-  /* ── Паучок loading ── */
   .spider-loader {
     display: flex;
     align-items: center;
@@ -694,7 +667,6 @@
   }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* Notification badge */
   .badge {
     position: absolute;
     top: -2px; right: -2px;
@@ -710,9 +682,7 @@
     align-items: center;
     justify-content: center;
   }
-  .bnav-btn { position: relative; }
 
-  /* Калибровка */
   .calibration-banner {
     background: linear-gradient(135deg, rgba(255,159,67,0.1), rgba(255,71,87,0.05));
     border: 1px solid rgba(255,159,67,0.3);
@@ -734,10 +704,7 @@
     margin-bottom: 12px;
     line-height: 1.5;
   }
-  .cal-btns {
-    display: flex;
-    gap: 8px;
-  }
+  .cal-btns { display: flex; gap: 8px; }
   .cal-btn {
     flex: 1;
     padding: 9px;
@@ -748,20 +715,13 @@
     cursor: pointer;
     transition: all 0.2s;
   }
-  .cal-btn.good {
-    color: var(--accent);
-    border-color: rgba(127,255,110,0.3);
-  }
-  .cal-btn.bad {
-    color: var(--hot);
-    border-color: rgba(255,71,87,0.3);
-  }
+  .cal-btn.good { color: var(--accent); border-color: rgba(127,255,110,0.3); }
+  .cal-btn.bad { color: var(--hot); border-color: rgba(255,71,87,0.3); }
   .cal-btn:active { transform: scale(0.97); }
 </style>
 </head>
 <body>
 
-<!-- Паутина фон -->
 <div class="web-bg">
   <svg viewBox="0 0 400 800" preserveAspectRatio="xMidYMid slice">
     <defs>
@@ -770,7 +730,6 @@
         <stop offset="100%" stop-color="#7fff6e" stop-opacity="0"/>
       </radialGradient>
     </defs>
-    <!-- Паутина: линии из центра -->
     <g stroke="white" stroke-width="0.5" opacity="0.6">
       <line x1="200" y1="150" x2="200" y2="0"/>
       <line x1="200" y1="150" x2="350" y2="50"/>
@@ -781,7 +740,6 @@
       <line x1="200" y1="150" x2="0" y2="200"/>
       <line x1="200" y1="150" x2="50" y2="50"/>
     </g>
-    <!-- Концентрические дуги -->
     <g stroke="white" stroke-width="0.4" fill="none" opacity="0.4">
       <path d="M200,40 Q310,90 350,150 Q310,210 200,250 Q90,210 50,150 Q90,90 200,40"/>
       <path d="M200,10 Q360,80 390,190 Q340,280 200,320 Q60,280 10,190 Q40,80 200,10"/>
@@ -791,28 +749,23 @@
 </div>
 <div class="noise"></div>
 
-<!-- Toast -->
 <div class="toast" id="toast"></div>
 
 <div class="app">
-  <!-- Header -->
   <div class="header">
     <div class="header-top">
       <div class="logo">
         <div class="logo-icon">
           <svg viewBox="0 0 36 36" fill="none">
-            <!-- Паучок SVG -->
             <circle cx="18" cy="16" r="7" fill="#7fff6e" opacity="0.9"/>
             <circle cx="18" cy="16" r="4" fill="#050508"/>
             <circle cx="18" cy="16" r="1.5" fill="#7fff6e"/>
-            <!-- Лапки -->
             <line x1="11" y1="12" x2="3" y2="7" stroke="#7fff6e" stroke-width="1.2" stroke-linecap="round"/>
             <line x1="11" y1="16" x2="2" y2="16" stroke="#7fff6e" stroke-width="1.2" stroke-linecap="round"/>
             <line x1="11" y1="20" x2="3" y2="25" stroke="#7fff6e" stroke-width="1.2" stroke-linecap="round"/>
             <line x1="25" y1="12" x2="33" y2="7" stroke="#7fff6e" stroke-width="1.2" stroke-linecap="round"/>
             <line x1="25" y1="16" x2="34" y2="16" stroke="#7fff6e" stroke-width="1.2" stroke-linecap="round"/>
             <line x1="25" y1="20" x2="33" y2="25" stroke="#7fff6e" stroke-width="1.2" stroke-linecap="round"/>
-            <!-- Паутинка вверх -->
             <line x1="18" y1="9" x2="18" y2="2" stroke="#7fff6e" stroke-width="0.8" opacity="0.5"/>
           </svg>
         </div>
@@ -821,13 +774,12 @@
           <div class="logo-sub">Lead Hunter v2.0</div>
         </div>
       </div>
-      <div class="status-pill">
-        <div class="status-dot"></div>
-        ACTIVE
+      <div class="status-pill" id="status-pill">
+        <div class="status-dot" id="status-dot"></div>
+        <span id="status-text">ACTIVE</span>
       </div>
     </div>
 
-    <!-- Статы -->
     <div class="stats-row">
       <div class="stat-card" id="sc1">
         <div class="stat-val" id="stat-today">0</div>
@@ -843,7 +795,6 @@
       </div>
     </div>
 
-    <!-- Навигация -->
     <div class="nav">
       <button class="nav-btn active" onclick="switchTab('leads',this)">Лиды</button>
       <button class="nav-btn" onclick="switchTab('profile',this)">Профиль</button>
@@ -851,13 +802,9 @@
     </div>
   </div>
 
-  <!-- Content -->
   <div class="content">
 
-    <!-- Лиды -->
     <div class="section active" id="sec-leads">
-
-      <!-- Калибровка -->
       <div class="calibration-banner" id="cal-banner">
         <div class="cal-title">🎯 Как лиды?</div>
         <div class="cal-sub">Скажи честно — я подстрою поиск точнее под тебя</div>
@@ -872,69 +819,63 @@
       </div>
     </div>
 
-    <!-- Профиль -->
     <div class="section" id="sec-profile">
       <div class="profile-section">
-
-        <!-- Тариф -->
         <div class="plan-card">
           <div>
-            <div class="plan-name" id="plan-name">Старт ⚡</div>
-            <div class="plan-until" id="plan-until">до 15.03.2026</div>
+            <div class="plan-name" id="plan-name">—</div>
+            <div class="plan-until" id="plan-until">—</div>
           </div>
-          <div class="plan-badge" id="plan-badge">СТАРТ</div>
+          <div class="plan-badge" id="plan-badge">—</div>
         </div>
 
-        <!-- Лимит лидов -->
         <div class="limit-bar-wrap">
           <div class="limit-top">
             <div class="limit-label">Лидов сегодня</div>
-            <div class="limit-val" id="limit-text">3 / 5</div>
+            <div class="limit-val" id="limit-text">0 / 0</div>
           </div>
           <div class="limit-bar">
             <div class="limit-fill" id="limit-fill" style="width:0%"></div>
           </div>
         </div>
 
-        <!-- Инфо о нише -->
         <div class="profile-card">
           <div class="profile-card-title">Твой профиль</div>
           <div class="profile-row">
             <div class="profile-row-icon">💼</div>
             <div>
               <div class="profile-row-label">Специализация</div>
-              <div class="profile-row-val" id="prof-profession">Загрузка...</div>
+              <div class="profile-row-val" id="prof-profession">—</div>
             </div>
           </div>
           <div class="profile-row">
             <div class="profile-row-icon">🎯</div>
             <div>
               <div class="profile-row-label">Твой клиент</div>
-              <div class="profile-row-val" id="prof-target">Загрузка...</div>
+              <div class="profile-row-val" id="prof-target">—</div>
             </div>
           </div>
           <div class="profile-row">
             <div class="profile-row-icon">💰</div>
             <div>
               <div class="profile-row-label">Средний чек</div>
-              <div class="profile-row-val" id="prof-check">Загрузка...</div>
+              <div class="profile-row-val" id="prof-check">—</div>
             </div>
           </div>
           <div class="profile-row">
             <div class="profile-row-icon">🔍</div>
             <div>
               <div class="profile-row-label">Мониторю чатов</div>
-              <div class="profile-row-val">100+ Telegram-чатов</div>
+              <div class="profile-row-val" id="prof-chats">—</div>
             </div>
           </div>
         </div>
 
-        <!-- Управление -->
         <div class="control-grid">
           <button class="ctrl-btn" onclick="togglePause()" id="pause-btn">
-            <div class="ctrl-btn-icon">⏸</div>
-            <div class="ctrl-btn-label">Пауза</div>
-            <div class="ctrl-btn-sub">Остановить поиск</div>
+            <div class="ctrl-btn-icon" id="pause-icon">⏸</div>
+            <div class="ctrl-btn-label" id="pause-label">Пауза</div>
+            <div class="ctrl-btn-sub" id="pause-sub">Остановить поиск</div>
           </button>
           <button class="ctrl-btn" onclick="renewPlan()">
             <div class="ctrl-btn-icon">🚀</div>
@@ -952,65 +893,57 @@
             <div class="ctrl-btn-sub">До Про</div>
           </button>
         </div>
-
       </div>
     </div>
 
-    <!-- Аналитика -->
     <div class="section" id="sec-analytics">
       <div class="analytics-section">
-
-        <!-- График по дням -->
         <div class="chart-card">
           <div class="chart-title">Лиды за 7 дней</div>
           <div class="bar-chart" id="bar-chart"></div>
         </div>
 
-        <!-- Воронка -->
         <div class="funnel-card">
           <div class="chart-title">Конверсия</div>
           <div class="funnel-row">
             <div class="funnel-label">Найдено</div>
             <div class="funnel-bar-wrap">
-              <div class="funnel-fill" style="width:100%; background: linear-gradient(90deg,#7fff6e,#6de860);" id="f1">47</div>
+              <div class="funnel-fill" style="width:0%; background: linear-gradient(90deg,#7fff6e,#6de860);" id="f1">0</div>
             </div>
           </div>
           <div class="funnel-row">
-            <div class="funnel-label">HOT лиды</div>
+            <div class="funnel-label">HOT</div>
             <div class="funnel-bar-wrap">
-              <div class="funnel-fill" style="width:0%; background: linear-gradient(90deg,#00d4ff,#0099cc);" id="f2">18</div>
+              <div class="funnel-fill" style="width:0%; background: linear-gradient(90deg,#00d4ff,#0099cc);" id="f2">0</div>
             </div>
           </div>
           <div class="funnel-row">
             <div class="funnel-label">Ответили</div>
             <div class="funnel-bar-wrap">
-              <div class="funnel-fill" style="width:0%; background: linear-gradient(90deg,#ff9f43,#e67e22);" id="f3">9</div>
+              <div class="funnel-fill" style="width:0%; background: linear-gradient(90deg,#ff9f43,#e67e22);" id="f3">0</div>
             </div>
           </div>
           <div class="funnel-row">
             <div class="funnel-label">Созвон</div>
             <div class="funnel-bar-wrap">
-              <div class="funnel-fill" style="width:0%; background: linear-gradient(90deg,#ff4757,#c0392b);" id="f4">3</div>
+              <div class="funnel-fill" style="width:0%; background: linear-gradient(90deg,#ff4757,#c0392b);" id="f4">0</div>
             </div>
           </div>
         </div>
 
-        <!-- Топ чаты -->
         <div class="profile-card">
           <div class="profile-card-title">Топ источники</div>
           <div id="top-chats"></div>
         </div>
-
       </div>
     </div>
 
-  </div><!-- /content -->
-</div><!-- /app -->
+  </div>
+</div>
 
-<!-- Bottom nav -->
 <div class="bottom-nav">
   <button class="bnav-btn active" onclick="switchSection('leads', this)">
-    <span class="badge" id="new-badge" style="display:none">3</span>
+    <span class="badge" id="new-badge" style="display:none">0</span>
     <div class="bnav-icon">🕸</div>
     <div class="bnav-label">Лиды</div>
   </button>
@@ -1025,8 +958,13 @@
 </div>
 
 <script>
-// ── Telegram WebApp init ──────────────────────────────────────
-const API_BASE = "https://obj-reliance-continuous-having.trycloudflare.com";
+/**
+ * ✅ ВАЖНО:
+ * Поставь актуальный trycloudflare URL, который выводит cloudflared.
+ * Пример из твоего лога:
+ *   https://shoot-properly-galleries-nova.trycloudflare.com
+ */
+const API_BASE = "https://shoot-properly-galleries-nova.trycloudflare.com"; // <-- ЗАМЕНИ НА АКТУАЛЬНЫЙ
 
 const tg = window.Telegram?.WebApp;
 
@@ -1037,80 +975,64 @@ if (tg) {
   tg.setBackgroundColor('#050508');
 }
 
-async function apiPost(path) {
-  const initData = tg?.initData;
-  if (!initData) throw new Error("Нет initData");
+// --- helpers ---
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(window.__toastTimer);
+  window.__toastTimer = setTimeout(() => t.classList.remove('show'), 2500);
+}
 
+function animateNumber(id, target) {
+  const el = document.getElementById(id);
+  target = Number(target || 0);
+  let start = 0;
+  const step = Math.max(1, Math.ceil(target / 30));
+  const interval = setInterval(() => {
+    start = Math.min(start + step, target);
+    el.textContent = start;
+    if (start >= target) clearInterval(interval);
+  }, 40);
+}
+
+function safeText(x) {
+  if (x === null || x === undefined) return "—";
+  const s = String(x);
+  return s.length ? s : "—";
+}
+
+// --- API ---
+function getInitData() {
+  const initData = tg?.initData || "";
+  if (!initData) throw new Error("Нет initData. Открой Mini App внутри Telegram.");
+  return initData;
+}
+
+async function apiPost(path, payload = {}) {
+  const initData = getInitData();
+
+  // Делаем совместимость: и header, и body.
   const r = await fetch(`${API_BASE}${path}`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ initData })
+    headers: {
+      "Content-Type": "application/json",
+      "X-TG-INITDATA": initData,
+    },
+    body: JSON.stringify({ initData, ...payload }),
   });
 
   if (!r.ok) {
     const txt = await r.text();
-    throw new Error(txt);
+    throw new Error(txt || `HTTP ${r.status}`);
   }
-
   return r.json();
 }
 
-async function loadRealData() {
-  try {
-    const me = await apiPost("/api/me");
-    const leads = await apiPost("/api/leads");
-
-    // ─── Статистика ───
-    animateNumber('stat-today', me.leads_today || 0);
-    animateNumber('stat-total', me.leads_total || 0);
-
-    const created = new Date(me.created_at);
-    const daysActive = Math.floor((Date.now() - created) / 86400000);
-    animateNumber('stat-days', daysActive);
-
-    // ─── План ───
-    document.getElementById('plan-name').textContent =
-      (me.plan === "pro" ? "Про 🚀" : "Старт ⚡");
-
-    document.getElementById('plan-badge').textContent =
-      (me.plan === "pro" ? "PRO" : "СТАРТ");
-
-    document.getElementById('plan-until').textContent =
-      me.sub_until ? "до " + me.sub_until.slice(0, 10) : "—";
-
-    // ─── Профиль ───
-    document.getElementById('prof-profession').textContent =
-      me.profile?.profession || "—";
-
-    document.getElementById('prof-target').textContent =
-      me.profile?.target || "—";
-
-    document.getElementById('prof-check').textContent =
-      me.profile?.avg_check || "—";
-
-    // ─── Лимит ───
-    const dailyLimit = me.plan === "pro" ? 999 : 5;
-    const pct = Math.min((me.leads_today / dailyLimit) * 100, 100);
-
-    document.getElementById('limit-text').textContent =
-      `${me.leads_today} / ${dailyLimit}`;
-
-    document.getElementById('limit-fill').style.width = pct + "%";
-
-    // ─── Лиды ───
-    renderLeadsFromAPI(leads.items || []);
-
-  } catch (e) {
-    document.getElementById('leads-list').innerHTML =
-      `<div class="empty-state">
-        <div class="empty-title">Ошибка загрузки</div>
-        <div class="empty-sub">${e.message}</div>
-      </div>`;
-  }
-}
-
+// --- UI renderers ---
 function renderLeadsFromAPI(items) {
   const list = document.getElementById('leads-list');
+  items = Array.isArray(items) ? items : [];
 
   if (!items.length) {
     list.innerHTML = `
@@ -1122,230 +1044,62 @@ function renderLeadsFromAPI(items) {
     return;
   }
 
-  list.innerHTML = items.map((lead, i) => `
-    <div class="lead-card" style="animation-delay:${i * 0.08}s">
-      <div class="lead-card-header">
-        <div class="lead-badge ${lead.score >= 0.8 ? 'hot' : 'warm'}">
-          ${lead.score >= 0.8 ? '🔥 Горячий' : '⚡ Тёплый'}
+  list.innerHTML = items.map((lead, i) => {
+    const score = Number(lead.score || 0);
+    const badgeClass = score >= 0.8 ? 'hot' : 'warm';
+    const badgeText = score >= 0.8 ? '🔥 Горячий' : '⚡ Тёплый';
+    const time = (lead.sent_at || "").slice(11,16);
+
+    const username = lead.lead_username ? '@' + lead.lead_username : "безника";
+    const chatTitle = safeText(lead.chat_title);
+    const text = safeText(lead.message_text);
+
+    return `
+      <div class="lead-card" style="animation-delay:${i * 0.08}s">
+        <div class="lead-card-header">
+          <div class="lead-badge ${badgeClass}">${badgeText}</div>
+          <div class="lead-time">${time || ''}</div>
         </div>
-        <div class="lead-time">
-          ${(lead.sent_at || "").slice(11,16)}
+        <div class="lead-user">${username}</div>
+        <div class="lead-chat">${chatTitle}</div>
+        <div class="lead-text">${text}</div>
+        <div class="lead-score-bar">
+          <div class="lead-score-fill" style="width:${Math.max(0, Math.min(100, score * 100))}%"></div>
+        </div>
+        <div class="lead-actions">
+          <button class="btn-write" onclick="openLead(${Number(lead.lead_user_id || 0)})">✍️ Написать</button>
         </div>
       </div>
-      <div class="lead-user">@${lead.lead_username || "безника"}</div>
-      <div class="lead-chat">${lead.chat_title || ""}</div>
-      <div class="lead-text">${lead.message_text || ""}</div>
-      <div class="lead-score-bar">
-        <div class="lead-score-fill"
-             style="width:${(lead.score || 0) * 100}%"></div>
-      </div>
-      <div class="lead-actions">
-        <button class="btn-write"
-          onclick="tg.openTelegramLink('tg://user?id=${lead.lead_user_id}')">
-          ✍️ Написать
-        </button>
-      </div>
-    </div>
-  `).join('');
+    `;
+  }).join('');
 }
 
-function animateNumber(id, target) {
-  const el = document.getElementById(id);
-  let start = 0;
-  const step = Math.ceil(target / 30) || 1;
-  const interval = setInterval(() => {
-    start = Math.min(start + step, target);
-    el.textContent = start;
-    if (start >= target) clearInterval(interval);
-  }, 40);
-}
+function renderChartFromAPI(weekCounts) {
+  const chart = document.getElementById('bar-chart');
+  const days = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
 
-loadRealData();
-
-// ── Mock данные (заменить на реальный API) ────────────────────
-const DATA = {
-  stats: { today: 3, total: 47, days: 12 },
-  plan: { name: 'Старт', badge: 'СТАРТ', until: '15.03.2026', daily: 5 },
-  profile: {
-    profession: 'Веб-разработка на Tilda и Webflow',
-    target: 'Малый бизнес — рестораны, салоны красоты, стоматологии',
-    check: '30 000 — 80 000 ₽'
-  },
-  leads: [
-    {
-      id: 1, hot: true, user: '@mikhail_dev', userId: 123456,
-      chat: 'Маркетинг и продвижение', score: 0.91,
-      text: 'Срочно нужен разработчик для лендинга под акцию. Бюджет есть, нужно быстро.',
-      time: '14:32'
-    },
-    {
-      id: 2, hot: true, user: '@salon_spb', userId: 234567,
-      chat: 'Бизнес Петербург', score: 0.84,
-      text: 'Ищем кто сделает сайт для салона красоты, нужна онлайн-запись. Кто делает на Tilda?',
-      time: '13:15'
-    },
-    {
-      id: 3, hot: false, user: '@resto_msk', userId: 345678,
-      chat: 'Ресторанный бизнес РФ', score: 0.67,
-      text: 'Нужен лендинг для нашего ресторана, хотим принимать заказы онлайн.',
-      time: '11:48'
-    },
-    {
-      id: 4, hot: false, user: '@med_clinic', userId: 456789,
-      chat: 'Медицина и бизнес', score: 0.71,
-      text: 'Кто-нибудь делает сайты для частных клиник? Нужна запись к врачу онлайн.',
-      time: '10:20'
-    },
-  ],
-  chart: [2, 5, 3, 7, 4, 8, 3],
-  chats: [
-    { name: 'Маркетинг и продвижение', count: 12 },
-    { name: 'Бизнес Петербург', count: 8 },
-    { name: 'Ресторанный бизнес РФ', count: 6 },
-    { name: 'Малый бизнес России', count: 5 },
-  ],
-  funnel: [47, 18, 9, 3],
-};
-
-// ── Загрузка данных ───────────────────────────────────────────
-function loadData() {
-  // Статистика
-  animateNumber('stat-today', DATA.stats.today);
-  animateNumber('stat-total', DATA.stats.total);
-  animateNumber('stat-days', DATA.stats.days);
-
-  // Индикаторы на stat-card
-  setTimeout(() => {
-    document.querySelectorAll('.stat-card').forEach(c => c.classList.add('loaded'));
-  }, 300);
-
-  // Профиль
-  document.getElementById('plan-name').textContent = DATA.plan.name + ' ⚡';
-  document.getElementById('plan-until').textContent = 'до ' + DATA.plan.until;
-  document.getElementById('plan-badge').textContent = DATA.plan.badge;
-  document.getElementById('prof-profession').textContent = DATA.profile.profession;
-  document.getElementById('prof-target').textContent = DATA.profile.target;
-  document.getElementById('prof-check').textContent = DATA.profile.check;
-
-  // Лимит
-  const pct = (DATA.stats.today / DATA.plan.daily * 100).toFixed(0);
-  document.getElementById('limit-text').textContent = `${DATA.stats.today} / ${DATA.plan.daily}`;
-  setTimeout(() => {
-    document.getElementById('limit-fill').style.width = pct + '%';
-  }, 500);
-
-  // Лиды
-  renderLeads();
-
-  // График
-  renderChart();
-
-  // Воронка (анимация с задержкой)
-  const funnelPcts = DATA.funnel.map(v => (v / DATA.funnel[0] * 100).toFixed(0) + '%');
-  setTimeout(() => {
-    document.getElementById('f1').style.width = funnelPcts[0];
-    document.getElementById('f1').textContent = DATA.funnel[0];
-  }, 400);
-  setTimeout(() => {
-    document.getElementById('f2').style.width = funnelPcts[1];
-    document.getElementById('f2').textContent = DATA.funnel[1];
-  }, 600);
-  setTimeout(() => {
-    document.getElementById('f3').style.width = funnelPcts[2];
-    document.getElementById('f3').textContent = DATA.funnel[2];
-  }, 800);
-  setTimeout(() => {
-    document.getElementById('f4').style.width = funnelPcts[3];
-    document.getElementById('f4').textContent = DATA.funnel[3];
-  }, 1000);
-
-  // Топ чаты
-  const chatsEl = document.getElementById('top-chats');
-  chatsEl.innerHTML = DATA.chats.map((c, i) => `
-    <div class="profile-row">
-      <div class="profile-row-icon">${['🥇','🥈','🥉','4️⃣'][i]}</div>
-      <div style="flex:1">
-        <div class="profile-row-label">${c.name}</div>
-        <div class="profile-row-val">${c.count} лидов</div>
-      </div>
-    </div>
-  `).join('');
-
-  // Badge новых лидов
-  const newLeads = DATA.leads.filter(l => l.hot).length;
-  if (newLeads > 0) {
-    const badge = document.getElementById('new-badge');
-    badge.textContent = newLeads;
-    badge.style.display = 'flex';
-  }
-
-  // Калибровка (показываем если много лидов)
-  if (DATA.stats.total >= 10) {
-    setTimeout(() => {
-      document.getElementById('cal-banner').classList.add('show');
-    }, 1000);
-  }
-}
-
-function renderLeads() {
-  const list = document.getElementById('leads-list');
-  if (DATA.leads.length === 0) {
-    list.innerHTML = `
-      <div class="empty-state">
-        <div class="empty-spider">🕷</div>
-        <div class="empty-title">Паучок ищет...</div>
-        <div class="empty-sub">Как только найдёт подходящего<br>человека — сразу покажу</div>
+  let arr = Array.isArray(weekCounts) ? weekCounts.slice(0, 7) : null;
+  if (!arr || !arr.length) {
+    chart.innerHTML = `
+      <div class="empty-state" style="padding:20px 0">
+        <div class="empty-sub">Нет данных для графика</div>
       </div>`;
     return;
   }
 
-  list.innerHTML = DATA.leads.map((lead, i) => `
-    <div class="lead-card" style="animation-delay:${i * 0.08}s">
-      <div class="lead-card-header">
-        <div class="lead-badge ${lead.hot ? 'hot' : 'warm'}">
-          ${lead.hot ? '🔥 Горячий' : '⚡ Тёплый'}
-        </div>
-        <div class="lead-time">${lead.time}</div>
-      </div>
-      <div class="lead-user">${lead.user}</div>
-      <div class="lead-chat">${lead.chat}</div>
-      <div class="lead-text">${lead.text}</div>
-      <div class="lead-score-bar">
-        <div class="lead-score-fill" style="width:0%" data-score="${lead.score}"></div>
-      </div>
-      <div class="lead-actions">
-        <button class="btn-write" onclick="writeLead(${lead.userId}, '${lead.user}')">
-          ✍️ Написать
-        </button>
-        <button class="btn-skip" onclick="skipLead(this, ${lead.id})" title="Скрыть">✕</button>
-      </div>
-    </div>
-  `).join('');
+  // если меньше 7 — дополним нулями слева
+  while (arr.length < 7) arr.unshift(0);
 
-  // Анимируем score-bars
-  setTimeout(() => {
-    document.querySelectorAll('.lead-score-fill').forEach(bar => {
-      bar.style.width = (parseFloat(bar.dataset.score) * 100) + '%';
-    });
-  }, 400);
-}
+  const max = Math.max(...arr, 1);
+  const todayIdx = (new Date().getDay() + 6) % 7; // Monday=0
 
-function renderChart() {
-  const days = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
-  const today = new Date().getDay();
-  const max = Math.max(...DATA.chart);
-  const chart = document.getElementById('bar-chart');
-
-  chart.innerHTML = DATA.chart.map((val, i) => {
-    const isToday = i === DATA.chart.length - 1;
-    const heightPct = max > 0 ? (val / max * 85) : 0;
-    const dayLabel = days[(today - (DATA.chart.length - 1 - i) + 7) % 7];
+  chart.innerHTML = arr.map((val, i) => {
+    const isToday = i === todayIdx;
+    const heightPct = (val / max * 85);
     return `
       <div class="bar-col">
-        <div class="bar${isToday ? ' today' : ''}"
-             style="height:0%"
-             data-h="${heightPct}%"></div>
-        <div class="bar-day">${dayLabel}</div>
+        <div class="bar${isToday ? ' today' : ''}" style="height:0%" data-h="${heightPct}%"></div>
+        <div class="bar-day">${days[i]}</div>
       </div>
     `;
   }).join('');
@@ -1354,10 +1108,172 @@ function renderChart() {
     document.querySelectorAll('.bar').forEach(bar => {
       bar.style.height = bar.dataset.h;
     });
-  }, 300);
+  }, 200);
 }
 
-// ── Навигация ─────────────────────────────────────────────────
+function renderTopChats(topChats) {
+  const el = document.getElementById('top-chats');
+  topChats = Array.isArray(topChats) ? topChats : [];
+  if (!topChats.length) {
+    el.innerHTML = `<div class="empty-sub">Пока пусто</div>`;
+    return;
+  }
+  el.innerHTML = topChats.slice(0, 4).map((c, i) => `
+    <div class="profile-row">
+      <div class="profile-row-icon">${['🥇','🥈','🥉','4️⃣'][i] || '•'}</div>
+      <div style="flex:1">
+        <div class="profile-row-label">${safeText(c.name || c.chat_title)}</div>
+        <div class="profile-row-val">${Number(c.count || 0)} лидов</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function setStatus(paused) {
+  const dot = document.getElementById('status-dot');
+  const pill = document.getElementById('status-pill');
+  const txt = document.getElementById('status-text');
+
+  if (paused) {
+    txt.textContent = 'PAUSE';
+    dot.style.background = '#ff4757';
+    dot.style.boxShadow = '0 0 6px #ff4757';
+    pill.style.background = 'rgba(255,71,87,0.08)';
+    pill.style.borderColor = 'rgba(255,71,87,0.2)';
+    pill.style.color = '#ff4757';
+  } else {
+    txt.textContent = 'ACTIVE';
+    dot.style.background = 'var(--accent)';
+    dot.style.boxShadow = '0 0 6px var(--accent)';
+    pill.style.background = 'rgba(127,255,110,0.08)';
+    pill.style.borderColor = 'rgba(127,255,110,0.2)';
+    pill.style.color = 'var(--accent)';
+  }
+}
+
+// --- data load ---
+async function loadRealData() {
+  try {
+    // 1) /api/me
+    const me = await apiPost("/api/me");
+
+    // 2) /api/leads
+    const leadsResp = await apiPost("/api/leads", { limit: 20 });
+
+    // stubs safety
+    const leads_today = Number(me.leads_today || 0);
+    const leads_total = Number(me.leads_total || 0);
+
+    animateNumber('stat-today', leads_today);
+    animateNumber('stat-total', leads_total);
+
+    const createdAt = me.created_at ? new Date(me.created_at) : null;
+    const daysActive = createdAt ? Math.max(0, Math.floor((Date.now() - createdAt.getTime()) / 86400000)) : 0;
+    animateNumber('stat-days', daysActive);
+
+    setTimeout(() => {
+      document.querySelectorAll('.stat-card').forEach(c => c.classList.add('loaded'));
+    }, 250);
+
+    const plan = (me.plan === "pro" ? "pro" : "start");
+    document.getElementById('plan-name').textContent = (plan === "pro" ? "Про 🚀" : "Старт ⚡");
+    document.getElementById('plan-badge').textContent = (plan === "pro" ? "PRO" : "СТАРТ");
+    document.getElementById('plan-until').textContent = me.sub_until ? ("до " + String(me.sub_until).slice(0, 10)) : "—";
+
+    const profile = me.profile || {};
+    document.getElementById('prof-profession').textContent = safeText(profile.profession);
+    document.getElementById('prof-target').textContent = safeText(profile.target);
+    document.getElementById('prof-check').textContent = safeText(profile.avg_check);
+    document.getElementById('prof-chats').textContent = safeText(me.chats_count ? `${me.chats_count} чатов` : "—");
+
+    const dailyLimit = (plan === "pro" ? 999 : 5);
+    const pct = Math.min((leads_today / dailyLimit) * 100, 100);
+    document.getElementById('limit-text').textContent = `${leads_today} / ${dailyLimit}`;
+    setTimeout(() => document.getElementById('limit-fill').style.width = pct + "%", 300);
+
+    // paused state
+    const paused = me.onboarding === "paused";
+    window.__isPaused = paused;
+    setStatus(paused);
+    syncPauseButton(paused);
+
+    // leads list
+    renderLeadsFromAPI(leadsResp.items || []);
+
+    // badge hot leads
+    const hotCount = (leadsResp.items || []).filter(x => Number(x.score || 0) >= 0.8).length;
+    const badge = document.getElementById('new-badge');
+    if (hotCount > 0) {
+      badge.textContent = hotCount;
+      badge.style.display = 'flex';
+    } else {
+      badge.style.display = 'none';
+    }
+
+    // analytics: week chart + funnel + top chats (если бэк отдаёт — используем, иначе минимум)
+    renderChartFromAPI(me.week_counts || []);
+    const funnel = me.funnel || null;
+    if (funnel) {
+      renderFunnel(funnel);
+    } else {
+      // минимум: найдено = total
+      renderFunnel({ found: leads_total, hot: hotCount, replied: 0, call: 0 });
+    }
+    renderTopChats(me.top_chats || []);
+
+    // calibration: если бэк говорит показать
+    if (me.show_calibration) {
+      document.getElementById('cal-banner').classList.add('show');
+    } else {
+      document.getElementById('cal-banner').classList.remove('show');
+    }
+
+  } catch (e) {
+    document.getElementById('leads-list').innerHTML =
+      `<div class="empty-state">
+        <div class="empty-title">Ошибка загрузки</div>
+        <div class="empty-sub">${safeText(e.message)}</div>
+      </div>`;
+    showToast("Ошибка: " + safeText(e.message));
+  }
+}
+
+function renderFunnel(f) {
+  const found = Number(f.found || f.total || 0);
+  const hot = Number(f.hot || 0);
+  const replied = Number(f.replied || 0);
+  const call = Number(f.call || 0);
+
+  const vals = [found, hot, replied, call];
+  const pcts = vals.map(v => found > 0 ? (v / found * 100) : 0);
+
+  setTimeout(() => {
+    document.getElementById('f1').style.width = (pcts[0] || 0) + '%';
+    document.getElementById('f1').textContent = found;
+  }, 200);
+  setTimeout(() => {
+    document.getElementById('f2').style.width = (pcts[1] || 0) + '%';
+    document.getElementById('f2').textContent = hot;
+  }, 350);
+  setTimeout(() => {
+    document.getElementById('f3').style.width = (pcts[2] || 0) + '%';
+    document.getElementById('f3').textContent = replied;
+  }, 500);
+  setTimeout(() => {
+    document.getElementById('f4').style.width = (pcts[3] || 0) + '%';
+    document.getElementById('f4').textContent = call;
+  }, 650);
+}
+
+function openLead(userId) {
+  userId = Number(userId || 0);
+  if (!userId) return;
+  tg?.HapticFeedback?.impactOccurred('medium');
+  tg?.openTelegramLink(`tg://user?id=${userId}`);
+  showToast('Открываю чат…');
+}
+
+// --- navigation ---
 function switchTab(tab, btn) {
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
@@ -1373,7 +1289,6 @@ function switchSection(sec, btn) {
     btn.classList.add('active');
   }
 
-  // Синхронизируем верхний nav
   const navBtns = document.querySelectorAll('.nav-btn');
   const tabMap = {leads: 0, profile: 1, analytics: 2};
   if (tabMap[sec] !== undefined) {
@@ -1381,128 +1296,71 @@ function switchSection(sec, btn) {
     navBtns[tabMap[sec]].classList.add('active');
   }
 
-  if (tg) tg.HapticFeedback?.selectionChanged();
+  tg?.HapticFeedback?.selectionChanged();
 }
 
-// ── Действия ──────────────────────────────────────────────────
-function writeLead(userId, username) {
-  if (tg) {
-    tg.HapticFeedback?.impactOccurred('medium');
-    tg.openTelegramLink(`tg://user?id=${userId}`);
-  }
-  showToast(`Открываю чат с ${username}`);
-}
+// --- actions (sendData to bot) ---
+function syncPauseButton(paused) {
+  const icon = document.getElementById('pause-icon');
+  const label = document.getElementById('pause-label');
+  const sub = document.getElementById('pause-sub');
 
-function skipLead(btn, id) {
-  const card = btn.closest('.lead-card');
-  card.style.transition = 'all 0.3s ease';
-  card.style.opacity = '0';
-  card.style.transform = 'translateX(60px)';
-  setTimeout(() => card.remove(), 300);
-  if (tg) tg.HapticFeedback?.impactOccurred('light');
-}
-
-let isPaused = false;
-function togglePause() {
-  isPaused = !isPaused;
-  const btn = document.getElementById('pause-btn');
-  const dot = document.querySelector('.status-dot');
-  const pill = document.querySelector('.status-pill');
-
-  if (isPaused) {
-    btn.innerHTML = `<div class="ctrl-btn-icon">▶️</div><div class="ctrl-btn-label">Запустить</div><div class="ctrl-btn-sub">Возобновить поиск</div>`;
-    dot.style.background = '#ff4757';
-    dot.style.boxShadow = '0 0 6px #ff4757';
-    pill.style.background = 'rgba(255,71,87,0.08)';
-    pill.style.borderColor = 'rgba(255,71,87,0.2)';
-    pill.querySelector('.status-dot + *') && (pill.lastChild.textContent = 'PAUSE');
-    pill.style.color = '#ff4757';
-    showToast('⏸ Паучок на паузе');
+  if (paused) {
+    icon.textContent = '▶️';
+    label.textContent = 'Запустить';
+    sub.textContent = 'Возобновить поиск';
   } else {
-    btn.innerHTML = `<div class="ctrl-btn-icon">⏸</div><div class="ctrl-btn-label">Пауза</div><div class="ctrl-btn-sub">Остановить поиск</div>`;
-    dot.style.background = 'var(--accent)';
-    dot.style.boxShadow = '0 0 6px var(--accent)';
-    pill.style.background = 'rgba(127,255,110,0.08)';
-    pill.style.borderColor = 'rgba(127,255,110,0.2)';
-    pill.style.color = 'var(--accent)';
-    showToast('▶️ Паучок снова работает');
+    icon.textContent = '⏸';
+    label.textContent = 'Пауза';
+    sub.textContent = 'Остановить поиск';
   }
+}
 
-  if (tg) {
-    tg.HapticFeedback?.impactOccurred('medium');
-    tg.sendData(JSON.stringify({ action: isPaused ? 'pause' : 'resume' }));
-  }
+function togglePause() {
+  const next = !window.__isPaused;
+  window.__isPaused = next;
+  setStatus(next);
+  syncPauseButton(next);
+
+  tg?.HapticFeedback?.impactOccurred('medium');
+  tg?.sendData(JSON.stringify({ action: next ? 'pause' : 'resume' }));
+  showToast(next ? '⏸ Паучок на паузе' : '▶️ Паучок снова работает');
 }
 
 function renewPlan() {
-  if (tg) {
-    tg.HapticFeedback?.impactOccurred('medium');
-    tg.sendData(JSON.stringify({ action: 'renew' }));
-  }
-  showToast('Открываю оплату...');
+  tg?.HapticFeedback?.impactOccurred('medium');
+  tg?.sendData(JSON.stringify({ action: 'renew' }));
+  showToast('Открываю оплату…');
 }
 
 function upgradeAccount() {
-  if (tg) {
-    tg.HapticFeedback?.impactOccurred('medium');
-    tg.sendData(JSON.stringify({ action: 'upgrade' }));
-  }
-  showToast('🚀 Открываю Про тариф...');
+  tg?.HapticFeedback?.impactOccurred('medium');
+  tg?.sendData(JSON.stringify({ action: 'upgrade' }));
+  showToast('🚀 Открываю Про тариф…');
 }
 
 function openSupport() {
-  if (tg) {
-    tg.HapticFeedback?.selectionChanged();
-    tg.sendData(JSON.stringify({ action: 'support' }));
-  }
-  showToast('💬 Открываю поддержку...');
+  tg?.HapticFeedback?.selectionChanged();
+  tg?.sendData(JSON.stringify({ action: 'support' }));
+  showToast('💬 Открываю поддержку…');
 }
 
 function calibrate(rating) {
   document.getElementById('cal-banner').classList.remove('show');
-  if (tg) {
-    tg.HapticFeedback?.notificationOccurred(rating === 'good' ? 'success' : 'warning');
-    tg.sendData(JSON.stringify({ action: 'calibrate', rating }));
-  }
-  if (rating === 'good') {
-    showToast('👍 Продолжаю в том же духе!');
-  } else {
-    showToast('🎯 Пересчитываю под тебя...');
-  }
+  tg?.HapticFeedback?.notificationOccurred(rating === 'good' ? 'success' : 'warning');
+  tg?.sendData(JSON.stringify({ action: 'calibrate', rating }));
+  showToast(rating === 'good' ? '👍 Продолжаю в том же духе!' : '🎯 Подстрою поиск…');
 }
 
-// ── Утилиты ───────────────────────────────────────────────────
-function animateNumber(id, target) {
-  const el = document.getElementById(id);
-  let start = 0;
-  const step = Math.ceil(target / 30);
-  const interval = setInterval(() => {
-    start = Math.min(start + step, target);
-    el.textContent = start;
-    if (start >= target) clearInterval(interval);
-  }, 40);
-}
-
-let toastTimer;
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove('show'), 2500);
-}
-
-// ── Получаем данные от бота ────────────────────────────────────
-// В реальном приложении: fetch('/api/data?user_id=...') или tg.initDataUnsafe
-// Пока используем mock и имитируем загрузку
-setTimeout(() => loadData(), 400);
-
-// Передаём данные в бот при закрытии
+// keep expanded
 if (tg) {
   tg.onEvent('viewportChanged', () => {
     if (!tg.isExpanded) tg.expand();
   });
 }
+
+// start
+loadRealData();
 </script>
 </body>
 </html>
